@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="151dp"
+        android:layout_height="115dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="#d9d9d9"
+        app:cardCornerRadius="16dp"
+
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="306dp"
+        android:layout_gravity="center"
+        >
+
+
+
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/viewCardBottom1"
+            android:layout_width="208dp"
+            android:layout_height="72dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="45dp"
+            android:background="@drawable/cardbottom"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/textViewname"
+            android:layout_width="145dp"
+            android:layout_height="31dp"
+            android:layout_alignTop="@+id/viewCardBottom1"
+            android:layout_alignEnd="@+id/viewCardBottom1"
+            android:layout_alignBottom="@+id/viewCardBottom1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="35dp"
+            android:text="Jhon Copper"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:id="@+id/textViewpicuri"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="133dp" />
+
+        <TextView
+            android:id="@+id/textViewdesignaton"
+            android:layout_width="109dp"
+            android:layout_height="22dp"
+            android:layout_alignStart="@+id/viewCardBottom1"
+            android:layout_alignTop="@+id/viewCardBottom1"
+            android:layout_alignEnd="@+id/viewCardBottom1"
+            android:layout_alignBottom="@+id/viewCardBottom1"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="14dp"
+            android:text="UX Designer @ Google"
+            android:textSize="6sp" />
+
+        <TextView
+            android:id="@+id/textViewsessiondatetime"
+            android:layout_width="49dp"
+            android:layout_height="43dp"
+            android:layout_alignStart="@+id/viewCardBottom1"
+            android:layout_alignTop="@+id/viewCardBottom1"
+            android:layout_alignEnd="@+id/viewCardBottom1"
+            android:layout_alignBottom="@+id/viewCardBottom1"
+            android:layout_marginStart="153dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="29dp"
+            android:text="$100/session"
+            android:textColor="#FFC107"
+            android:textSize="6sp" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application 1</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="mentorme">mentorme</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="title_activity_main4">MainActivity4</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

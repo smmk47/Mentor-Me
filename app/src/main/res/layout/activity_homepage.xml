@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ddf7f6"
+    tools:context=".homepage">
+
+
+    <View
+        android:id="@+id/firstCircle"
+
+        android:background="@drawable/circle"
+
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="-70dp"
+        android:layout_marginBottom="0dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+
+        />
+
+    <View
+        android:id="@+id/SecondCircle"
+
+        android:background="@drawable/circle"
+
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="-70dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/navicircle"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/rectangleView"
+        android:layout_width="411dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/navibar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="76dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/homeicon"
+        android:gravity="bottom|center_horizontal"
+        android:hapticFeedbackEnabled="false"
+        android:text="Home"
+
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="@+id/rectangleView"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/searchicon"
+        android:gravity="bottom|center_horizontal"
+
+        android:text="search"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="80dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/chaticon"
+        android:gravity="bottom|center_horizontal"
+
+        android:text="chat"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/button211"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button211"
+        android:layout_width="79dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/profileicon"
+        android:gravity="bottom|center_horizontal"
+        android:text="profile"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="@+id/rectangleView"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="88dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="52dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/uploadicon"
+        android:gravity="bottom|center_horizontal"
+        android:text="upload"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="118dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="52dp"
+        android:text="HELLO,"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="140dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="52dp"
+        android:text="USER"
+        android:textColor="#156F77"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="47dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="71dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/bellicon"
+        android:drawablePadding="@android:dimen/app_icon_size"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:text="Ready for mentorship? Let's begin the journey! "
+        android:textColor="#156F77"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.282"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="375dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="10dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal">
+
+            <!-- Buttons inside your LinearLayout -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:backgroundTint="#aee3dc"
+                android:text="All"
+                android:textColor="#156F77"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:backgroundTint="#aee3dc"
+                android:text="Education"
+                android:textColor="#156F77"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="#aee3dc"
+                android:text="Entrepreneurship"
+                android:textColor="#156F77"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="91dp"
+                android:layout_height="38dp"
+                android:backgroundTint="#aee3dc"
+                android:text="Career"
+                android:textColor="#156F77"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:backgroundTint="#aee3dc"
+                android:text="Opportunities"
+                android:textColor="#156F77"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
+        android:text="Top Mentors for you"
+        android:textColor="#156F77"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
+        android:text="View All"
+        android:textColor="#156F77"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView252"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:text="View All"
+        android:textColor="#156F77"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="359dp"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="10dp"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView14"
+                android:layout_width="151dp"
+                android:layout_height="115dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#d9d9d9"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="306dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/viewCardBottom14"
+                        android:layout_width="122dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/cardbottom" />
+
+                    <TextView
+                        android:id="@+id/textView2614"
+                        android:layout_width="68dp"
+                        android:layout_height="18dp"
+                        android:layout_alignTop="@+id/viewCardBottom14"
+                        android:layout_alignEnd="@+id/viewCardBottom14"
+                        android:layout_alignBottom="@+id/viewCardBottom14"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="48dp"
+                        android:layout_marginBottom="24dp"
+                        android:text="Jhon Copper"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView2714"
+                        android:layout_width="71dp"
+                        android:layout_height="12dp"
+                        android:layout_alignStart="@+id/viewCardBottom14"
+                        android:layout_alignTop="@+id/viewCardBottom14"
+                        android:layout_alignEnd="@+id/viewCardBottom14"
+                        android:layout_alignBottom="@+id/viewCardBottom14"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="47dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="UX Designer @ Google"
+                        android:textSize="6sp" />
+
+                    <TextView
+                        android:id="@+id/textView2814"
+                        android:layout_width="40dp"
+                        android:layout_height="14dp"
+                        android:layout_alignStart="@+id/viewCardBottom14"
+                        android:layout_alignTop="@+id/viewCardBottom14"
+                        android:layout_alignEnd="@+id/viewCardBottom14"
+                        android:layout_alignBottom="@+id/viewCardBottom14"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="78dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Available"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/textView2914"
+                        android:layout_width="40dp"
+                        android:layout_height="8dp"
+                        android:layout_alignStart="@+id/viewCardBottom14"
+                        android:layout_alignTop="@+id/viewCardBottom14"
+                        android:layout_alignEnd="@+id/viewCardBottom14"
+                        android:layout_alignBottom="@+id/viewCardBottom14"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="$100/session"
+                        android:textColor="#FFC107"
+                        android:textSize="6sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView25"
+                android:layout_width="151dp"
+                android:layout_height="115dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#d9d9d9"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                tools:layout_editor_absoluteX="182dp"
+                tools:layout_editor_absoluteY="306dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/viewCardBottom25"
+                        android:layout_width="122dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/cardbottom" />
+
+                    <TextView
+                        android:id="@+id/textView2625"
+                        android:layout_width="68dp"
+                        android:layout_height="18dp"
+                        android:layout_alignTop="@+id/viewCardBottom25"
+                        android:layout_alignEnd="@+id/viewCardBottom25"
+                        android:layout_alignBottom="@+id/viewCardBottom25"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="48dp"
+                        android:layout_marginBottom="24dp"
+                        android:text="Jhon Copper"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView2725"
+                        android:layout_width="71dp"
+                        android:layout_height="12dp"
+                        android:layout_alignStart="@+id/viewCardBottom25"
+                        android:layout_alignTop="@+id/viewCardBottom25"
+                        android:layout_alignEnd="@+id/viewCardBottom25"
+                        android:layout_alignBottom="@+id/viewCardBottom25"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="47dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="UX Designer @ Google"
+                        android:textSize="6sp" />
+
+                    <TextView
+                        android:id="@+id/textView2825"
+                        android:layout_width="40dp"
+                        android:layout_height="14dp"
+                        android:layout_alignStart="@+id/viewCardBottom25"
+                        android:layout_alignTop="@+id/viewCardBottom25"
+                        android:layout_alignEnd="@+id/viewCardBottom25"
+                        android:layout_alignBottom="@+id/viewCardBottom25"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="78dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Available"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/textView2925"
+                        android:layout_width="40dp"
+                        android:layout_height="8dp"
+                        android:layout_alignStart="@+id/viewCardBottom25"
+                        android:layout_alignTop="@+id/viewCardBottom25"
+                        android:layout_alignEnd="@+id/viewCardBottom25"
+                        android:layout_alignBottom="@+id/viewCardBottom25"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="$100/session"
+                        android:textColor="#FFC107"
+                        android:textSize="6sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView36"
+                android:layout_width="151dp"
+                android:layout_height="115dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#d9d9d9"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                tools:layout_editor_absoluteX="28dp"
+                tools:layout_editor_absoluteY="433dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/viewCardBottom36"
+                        android:layout_width="122dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/cardbottom" />
+
+                    <TextView
+                        android:id="@+id/textView2636"
+                        android:layout_width="68dp"
+                        android:layout_height="18dp"
+                        android:layout_alignTop="@+id/viewCardBottom36"
+                        android:layout_alignEnd="@+id/viewCardBottom36"
+                        android:layout_alignBottom="@+id/viewCardBottom36"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="48dp"
+                        android:layout_marginBottom="24dp"
+                        android:text="Jhon Copper"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView2736"
+                        android:layout_width="71dp"
+                        android:layout_height="12dp"
+                        android:layout_alignStart="@+id/viewCardBottom36"
+                        android:layout_alignTop="@+id/viewCardBottom36"
+                        android:layout_alignEnd="@+id/viewCardBottom36"
+                        android:layout_alignBottom="@+id/viewCardBottom36"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="47dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="UX Designer @ Google"
+                        android:textSize="6sp" />
+
+                    <TextView
+                        android:id="@+id/textView2836"
+                        android:layout_width="40dp"
+                        android:layout_height="14dp"
+                        android:layout_alignStart="@+id/viewCardBottom36"
+                        android:layout_alignTop="@+id/viewCardBottom36"
+                        android:layout_alignEnd="@+id/viewCardBottom36"
+                        android:layout_alignBottom="@+id/viewCardBottom36"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="78dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Available"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/textView2936"
+                        android:layout_width="40dp"
+                        android:layout_height="8dp"
+                        android:layout_alignStart="@+id/viewCardBottom36"
+                        android:layout_alignTop="@+id/viewCardBottom36"
+                        android:layout_alignEnd="@+id/viewCardBottom36"
+                        android:layout_alignBottom="@+id/viewCardBottom36"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="$100/session"
+                        android:textColor="#FFC107"
+                        android:textSize="6sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:text="Educational Mentors"
+        android:textColor="#156F77"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

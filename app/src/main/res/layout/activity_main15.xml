@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c2f3f0"
+    tools:context=".MainActivity15">
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="408dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Button
+        android:id="@+id/backButtfdon"
+        android:layout_width="45dp"
+        android:layout_height="44dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/backarrow"
+        android:backgroundTint="#156F77"
+        android:padding="8dp"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <Button
+        android:id="@+id/makeaudiocall"
+        android:layout_width="55dp"
+        android:layout_height="41dp"
+        android:background="@drawable/phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+
+    <Button
+        android:id="@+id/makevideocall"
+        android:layout_width="55dp"
+        android:layout_height="41dp"
+        android:background="@drawable/camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="213dp"
+        android:layout_height="41dp"
+        android:text="John Copper"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.338"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pmrv"
+        android:layout_width="397dp"
+        android:layout_height="402dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="381dp"
+        android:layout_height="96dp"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="#53c3cb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85">
+
+
+        <EditText
+            android:id="@+id/messagetext"
+            android:layout_width="183dp"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="78dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginBottom="42dp"
+            android:hint="Type Something . . . "
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/attach_image"
+            android:layout_width="26dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="318dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/vector__2_" />
+
+        <Button
+            android:id="@+id/clickphoto"
+            android:layout_width="26dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="274dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="81dp"
+            android:layout_marginBottom="47dp"
+            android:background="@drawable/camera_alt" />
+
+        <Button
+            android:id="@+id/recordvoice"
+            android:layout_width="26dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="304dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="45dp"
+            android:background="@drawable/mic" />
+
+        <Button
+            android:id="@+id/sendbutton"
+            android:layout_width="26dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="337dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/send" />
+
+        <Button
+            android:id="@+id/attach_file"
+            android:layout_width="26dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="347dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/attach_file" />
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/navicircle"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/rectangleView"
+        android:layout_width="411dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/navibar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="76dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/homeicon"
+        android:gravity="bottom|center_horizontal"
+        android:hapticFeedbackEnabled="false"
+        android:text="Home"
+
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="@+id/rectangleView"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="82dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/searchicon"
+        android:gravity="bottom|center_horizontal"
+
+        android:text="search"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="80dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/chaticon"
+        android:gravity="bottom|center_horizontal"
+
+        android:text="chat"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/button211"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button211"
+        android:layout_width="79dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/profileicon"
+        android:gravity="bottom|center_horizontal"
+        android:text="profile"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="@+id/rectangleView"
+        app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="88dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="52dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/uploadicon"
+        android:gravity="bottom|center_horizontal"
+        android:text="upload"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
