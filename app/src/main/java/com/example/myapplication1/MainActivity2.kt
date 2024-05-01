@@ -8,95 +8,102 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.jsoup.Jsoup
 
 class MainActivity2 : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth // Declare FirebaseAuth variable
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-
-
-
-
-        auth = FirebaseAuth.getInstance()
-
-        // Find the button by its ID
         val loginButton: Button = findViewById(R.id.loginButton)
+        val emailEditText: EditText = findViewById(R.id.email)
+        val passwordEditText: EditText = findViewById(R.id.password)
 
-        val email = findViewById<EditText>(R.id.email)
-        val password = findViewById<EditText>(R.id.password)
-
-
-        loginButton.setOnClickListener {
-            val userEmail = email.text.toString().trim()
-            val userPass = password.text.toString().trim()
-
-            if (userEmail.isEmpty() || userPass.isEmpty())
-            {
-                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                userSignIn(userEmail, userPass)
-            }
-        }
+        val signupButton: TextView = findViewById(R.id.textView3)
 
 
-        val forgotPasswordTextView: TextView = findViewById(R.id.textView66)
-        forgotPasswordTextView.setOnClickListener {
-            val intent = Intent(this, forgotpassword::class.java)
-            startActivity(intent)
-        }
-
-
-        val signupPasswordTextView: TextView = findViewById(R.id.textView3)
-        signupPasswordTextView.setOnClickListener {
+        signupButton.setOnClickListener{
             val intent = Intent(this, MainActivity3::class.java)
             startActivity(intent)
         }
 
+        loginButton.setOnClickListener {
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-
-
-    }
-
-    private fun userSignIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user: FirebaseUser? = auth.currentUser
-                    Toast.makeText(this, "Sign in successful", Toast.LENGTH_SHORT).show()
-
-                    // Fetch user data from Firebase Realtime Database
-                    val userRef =  user?.email?.replace(".", ",")
-                            ?.let { FirebaseDatabase.getInstance().getReference("Users").child(it) }
-                    userRef?.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            val uname = snapshot.child("name").value.toString()
-                            val intent = Intent(this@MainActivity2, homepage::class.java)
-                            intent.putExtra("uname", uname) // Pass the username to homepage
-                            startActivity(intent)
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.e("Firebase", "Error fetching user data: ${error.message}")
-                        }
-                    })
-                } else {
-                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+           // val email = etEmail.text.toString()
+           // val password = etPassword.text.toString()
+                       //http://192.168.54.54/smda3/login.php
+            val url = "http://192.168.0.102/smd/login.php"
+            val stringRequest = object : StringRequest(
+                Request.Method.POST, url,
+                Response.Listener { response ->
+                    // Handle successful response
+                    Log.d("API Response", response)
+                    try {
+                        val htmlResponse = response.trim()
+                        val parser = Jsoup.parse(htmlResponse)
+                        val elements = parser.select("p")
+                        val name = elements[0].text()
+                        val email = elements[1].text()
+                        val phone = elements[2].text()
+                        val country = elements[3].text()
+                        val city = elements[4].text()
+                        val password = elements[5].text()
+                        val picuri = elements[6].text()
+                        val usertoken = elements[7].text()
+                        // Use the parsed data
+                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, homepage::class.java)
+                        intent.putExtra("name", name)
+                        intent.putExtra("email", email)
+                        intent.putExtra("phone", phone)
+                        intent.putExtra("country", country)
+                        intent.putExtra("city", city)
+                        intent.putExtra("password", password)
+                        intent.putExtra("picuri", picuri)
+                        intent.putExtra("usertoken", usertoken)
+                        startActivity(intent)
+                        finish()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        // Handle HTML parsing error
+                        Toast.makeText(this, "HTML parsing error", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                Response.ErrorListener { error ->
+                    // Handle error
+                    Log.e("API Error", "Error occurred: ${error.message}")
+                    // Display an error message to the user
+                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                }) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    // Add email and password to the params
+                    params["email"] = email
+                    params["password"] = password
+                    return params
                 }
             }
-    }
 
+// Add the request to the RequestQueue
+            Volley.newRequestQueue(this).add(stringRequest)
+
+
+
+
+
+
+        }
+
+
+
+    }
 
 
 }

@@ -1,8 +1,5 @@
 package com.example.myapplication1
 
-
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,120 +7,109 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONException
+import org.json.JSONObject
 
 class MainActivity3 : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth // Declare FirebaseAuth variable
+    // API URL. Ensure this is the correct endpoint.
+    private val apiUrl = "http://192.168.54.54/smd/insertuser.php"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        auth = FirebaseAuth.getInstance()
-
-        val sign: Button = findViewById(R.id.button2)
-
-        sign.setOnClickListener {
-            val intent = Intent(this, verifyphone::class.java)
-            startActivity(intent)
-        }
-
+        val emailEditText: EditText = findViewById(R.id.editTextText2)
+        val passwordEditText: EditText = findViewById(R.id.editTextText9)
+        val nameEditText: EditText = findViewById(R.id.editTextText)
+        val phoneEditText: EditText = findViewById(R.id.editTextText6)
+        val countryEditText: EditText = findViewById(R.id.editTextText7)
+        val cityEditText: EditText = findViewById(R.id.editTextText8)
+        val signupBtn: Button = findViewById(R.id.button2)
         val loginButton: Button = findViewById(R.id.button3)
 
-        loginButton.setOnClickListener {
-            val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent)
-        }
-
-        val email = findViewById<EditText>(R.id.editTextText2)
-        val password = findViewById<EditText>(R.id.editTextText9)
-        val nameEditText = findViewById<EditText>(R.id.editTextText)
-        val phoneEditText = findViewById<EditText>(R.id.editTextText6)
-        val countryEditText = findViewById<EditText>(R.id.editTextText7)
-        val cityEditText = findViewById<EditText>(R.id.editTextText8)
-
-
-
-
-        val signupBtn = findViewById<Button>(R.id.button2)
-
         signupBtn.setOnClickListener {
-            val userEmail = email.text.toString().trim()
-            val userPass = password.text.toString().trim()
+            val userEmail = emailEditText.text.toString().trim()
+            val userPass = passwordEditText.text.toString().trim()
             val name = nameEditText.text.toString().trim()
             val phone = phoneEditText.text.toString().trim()
             val country = countryEditText.text.toString().trim()
             val city = cityEditText.text.toString().trim()
 
-
-            if (userEmail.isEmpty() || userPass.isEmpty() || name.isEmpty() || phone.isEmpty() || country.isEmpty()) {
+            if (userEmail.isEmpty() || userPass.isEmpty() || name.isEmpty() || phone.isEmpty() || country.isEmpty() || city.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                val signupUser = newuser(name, userEmail, phone, country,city, userPass ,"","")
-                userSignUp(userEmail, userPass, signupUser)
+                val signupUser = newuser(name, userEmail, phone, country, city, userPass, "", "")
+                userSignUp(emailEditText.text.toString(), passwordEditText.text.toString(), signupUser)
             }
+        }
 
-
-
+        loginButton.setOnClickListener {
+            startActivity(Intent(this, MainActivity2::class.java))
         }
     }
 
     private fun userSignUp(email: String, password: String, signupUser: newuser) {
-        auth.createUserWithEmailAndPassword(email, password)
-            //auth.currentUser.up
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user: FirebaseUser? = auth.currentUser
-                    submitData(signupUser)
-                    Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                } else {
-                    if (task.exception is FirebaseAuthUserCollisionException) {
-                        Toast.makeText(this, "Email already in use", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Sign up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        submitData(signupUser)
     }
 
     private fun submitData(signupUser: newuser) {
-        Log.d("Firebase", "Submitting data to database: $signupUser")
-        val database = FirebaseDatabase.getInstance().reference
-        database.child("Users").child(signupUser.email.replace(".", ",")).setValue(signupUser)
-            .addOnSuccessListener {
-                Toast.makeText(this@MainActivity3, "User registered successfully", Toast.LENGTH_SHORT).show()
-                Log.d("Firebase", "Data submitted successfully: $signupUser")
 
-                // Fetch user data from Firebase Realtime Database
-                val userRef = FirebaseDatabase.getInstance().getReference("Users").child(signupUser.email.replace(".", ","))
-                userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val uname = snapshot.child("name").value.toString()
-                        val intent = Intent(this@MainActivity3, homepage::class.java)
-                        intent.putExtra("uname", uname) // Pass the username to homepage
-                        startActivity(intent)
-                        finish()
+
+        val name = signupUser.name
+        val email =signupUser.email
+        val phone = signupUser.phone
+        val city = signupUser.city
+        val country = signupUser.country
+        val password = signupUser.password
+
+        val url = "http://172.17.9.53/smda3/login.php" // Update the URL to your signup endpoint
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener { response ->
+                // Handle successful response
+                Log.d("API Response", response)
+                // Parse the response JSON if necessary
+                try {
+                    val jsonResponse = JSONObject(response)
+                    val status = jsonResponse.getString("status")
+                    val message = jsonResponse.getString("message")
+                    if (status == "success") {
+                        // Handle successful registration, e.g., navigate to another activity
+                    } else {
+                        // Handle unsuccessful registration, e.g., display an error message
                     }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.e("Firebase", "Error fetching user data: ${error.message}")
-                        // Finish activity if data fetch fails
-                        finish()
-                    }
-                })
-
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    // Handle JSON parsing error
+                }
+            },
+            Response.ErrorListener { error ->
+                // Handle error
+                Log.e("API Error", "Error occurred: ${error.message}")
+                // Display an error message to the user
+                Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }) {
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+                // Add user data to the params
+                params["name"] = name
+                params["email"] = email
+                params["phone"] = phone
+                params["city"] = city
+                params["country"] = country
+                params["password"] = password
+                return params
             }
-            .addOnFailureListener {
-                Toast.makeText(this@MainActivity3, "Failed to register user: ${it.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Firebase", "Failed to submit data: ${it.message}")
-            }
+        }
+
+// Add the request to the RequestQueue
+        Volley.newRequestQueue(this).add(stringRequest)
+
     }
-
 }
+

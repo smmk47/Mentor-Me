@@ -57,7 +57,7 @@ class Adapter1(private val mentorsList: List<newmentor>, private val context: Co
         holder.designation.text = mentor.designation
         holder.status.text = mentor.status
         holder.sessionprice.text = mentor.price
-        holder.picuri.text = mentor.picuri
+        holder.picuri.text = mentor.picuri.toString()
 
     }
 }

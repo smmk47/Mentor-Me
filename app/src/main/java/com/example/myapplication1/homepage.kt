@@ -6,7 +6,6 @@ import android.content.Intent
 import android.database.ContentObserver
 import android.media.projection.MediaProjectionManager
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -14,6 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,6 +32,7 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
+        fetchMentors(this)
 
 //        Handler().postDelayed({
 //            // Intent to start the LoginPage activity
@@ -39,56 +42,6 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
 //        }, 2500) // 2500 milliseconds is 2.5 seconds
 
 
-
-// Create the observer instance and register it with the content resolver
-        screenshotObserver = ScreenshotObserver(
-            contentResolver,
-            applicationContext,
-            android.os.Handler()
-        )
-        contentResolver.registerContentObserver(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            true,
-            screenshotObserver
-        )
-
-
-
-        val database = FirebaseDatabase.getInstance()
-        val ref = database.getReference("mentors")
-
-
-
-
-
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val mentorsList = mutableListOf<newmentor>()
-                    for (mentorSnapshot in snapshot.children) {
-                        val mentor = mentorSnapshot.getValue(newmentor::class.java)
-                        mentor?.let {
-                            mentorsList.add(it)
-                        }
-                    }
-                    // Now you have the list of mentors, you can pass it to your adapter
-                    //Adapter1.updateData(mentorsList)
-
-                    val adapter=Adapter1(mentorsList,this@homepage)
-                    adapter.setOnItemClickListener(this@homepage)
-                    val rv = findViewById<RecyclerView>(R.id.rv)
-                    val layoutManager = LinearLayoutManager(this@homepage, LinearLayoutManager.HORIZONTAL, false)
-                    rv.layoutManager = layoutManager
-                    rv.adapter = adapter
-
-
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Failed to read value.", error.toException())
-            }
-        })
 
 
 
@@ -108,7 +61,19 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
         }
 
 
-        val userName = intent.getStringExtra("uname")
+        val userName = intent.getStringExtra("name")
+        // Retrieve user information from extras
+        val name = intent.getStringExtra("name")
+        val email = intent.getStringExtra("email")
+        val phone = intent.getStringExtra("phone")
+        val country = intent.getStringExtra("country")
+        val city = intent.getStringExtra("city")
+        val picUri = intent.getStringExtra("picUri")
+        val userToken = intent.getStringExtra("userToken")
+        val password = intent.getStringExtra("password")
+
+
+
 
         // Display user's name in a TextView
         val textView22: TextView = findViewById(R.id.textView22)
@@ -121,9 +86,14 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
             myFirebaseMessagingService.generateNotification(this,"mentor_me", "you added mentor successfully")
 
 
+            intent.putExtra("name", name)
+            intent.putExtra("city", city)
+            intent.putExtra("country", country)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
 
-          //  val intent = Intent(this, homepage::class.java)
-          //  startActivity(intent)
+            //  val intent = Intent(this, homepage::class.java)
+            //  startActivity(intent)
         }
 
 
@@ -131,6 +101,11 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
 
         button18.setOnClickListener {
             val intent = Intent(this, searchhome::class.java)
+            intent.putExtra("name", name)
+            intent.putExtra("city", city)
+            intent.putExtra("country", country)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
             startActivity(intent)
         }
 
@@ -139,11 +114,25 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
 
         button22.setOnClickListener {
             val intent = Intent(this, MainActivity12::class.java)
+
+            intent.putExtra("name", name)
+            intent.putExtra("city", city)
+            intent.putExtra("country", country)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
+
             startActivity(intent)
         }
         val button20: Button = findViewById(R.id.button20)
         button20.setOnClickListener {
             val intent = Intent(this, MainActivity14::class.java)
+
+            intent.putExtra("name", name)
+            intent.putExtra("city", city)
+            intent.putExtra("country", country)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
+
             startActivity(intent)
         }
 
@@ -151,6 +140,13 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
         val button211: Button = findViewById(R.id.button211)
         button211.setOnClickListener {
             val intent = Intent(this, MainActivity21::class.java)
+
+            intent.putExtra("name", name)
+            intent.putExtra("city", city)
+            intent.putExtra("country", country)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
+
             startActivity(intent)
         }
 
@@ -170,12 +166,12 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
 
 
 
-       // val viewCardBottom1: View = findViewById(R.id.rv.viewCardBottom1)
+        // val viewCardBottom1: View = findViewById(R.id.rv.viewCardBottom1)
 
         //viewCardBottom1.setOnClickListener {
         //    val intent = Intent(this, Main10Activity::class.java)
         //    startActivity(intent)
-       // }
+        // }
 
 
         getFCMToken()
@@ -268,7 +264,47 @@ class homepage<Query : Any> : AppCompatActivity(), Adapter1.OnItemClickListener 
 
 
 
+    private fun fetchMentors(context: Context) {
+        val url = "http://192.168.0.102/smd/getmentors.php"
+        val mentorsList = mutableListOf<newmentor>()
+
+        val request = JsonArrayRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                for (i in 0 until response.length()) {
+                    val mentorObj = response.getJSONObject(i)
+                    val mentor = newmentor(
+                        mentorObj.getString("name"),
+                        mentorObj.getString("description"),
+                        mentorObj.getString("status"),
+                        mentorObj.getString("designation"),
+                        mentorObj.getString("sessionprice")
+                    )
+                    mentorsList.add(mentor)
+                }
+
+
+                val adapter=Adapter1(mentorsList,this@homepage)
+                adapter.setOnItemClickListener(this@homepage)
+                val rv = findViewById<RecyclerView>(R.id.rv)
+                val layoutManager = LinearLayoutManager(this@homepage, LinearLayoutManager.HORIZONTAL, false)
+                rv.layoutManager = layoutManager
+                rv.adapter = adapter
+
+            },
+            { error ->
+                error.printStackTrace()
+                // Handle error response
+            }
+        )
+        Volley.newRequestQueue(context).add(request)
+    }
+
+
+
+
 }
+
 
 
 

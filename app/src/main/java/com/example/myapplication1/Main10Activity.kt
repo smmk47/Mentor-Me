@@ -34,12 +34,12 @@ class Main10Activity : AppCompatActivity() {
             Glide.with(this@Main10Activity /* context */)
                 .load(picuri)
                 .placeholder(R.drawable.profileicon) // Placeholder image while loading
-                .error(R.drawable.profileicon) // Error image if loading fails
+                .error(R.drawable.pro) // Error image if loading fails
                 .into(circleImageView)
 
         } else {
             // Handle if user data is null
-            Toast.makeText(applicationContext, "image not found", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "image not found", Toast.LENGTH_SHORT).show()
         }
 
         // Find TextViews in your layout

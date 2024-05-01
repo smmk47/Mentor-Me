@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.myapplication1.R.*
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +24,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 
 class MainActivity13 : AppCompatActivity() {
-    private lateinit var currentUserEmail: String
+    private var currentUser: String = ""
+
     private lateinit var mentorEmail: String
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -46,6 +51,9 @@ class MainActivity13 : AppCompatActivity() {
         val status = intent.getStringExtra("status")
         val picuri = intent.getStringExtra("picuri")
         val circleImageView: CircleImageView = findViewById(R.id.profile)
+
+
+        //val storedEmail = sharedPref.getString("email", "")
 
 
         // Find TextViews in your layout
@@ -122,6 +130,15 @@ class MainActivity13 : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val firebaseHelper = FirebaseHelper()
+        val notification = notifications(useremail = currentUser, notificationdata = "Your Session booked successfully with  "  )
+        firebaseHelper.addNotification(notification)
+
+
+        val myFirebaseMessagingService = MyFirebaseMessagingService()
+        myFirebaseMessagingService.generateNotification(this,"mentor_me", "Your Session booked successfully with  "   )
+
+
 
         val Button3: ImageButton = findViewById(id.audcall)
 
@@ -162,60 +179,71 @@ class MainActivity13 : AppCompatActivity() {
         }
 
 
+
         val booksession: Button = findViewById<Button>(R.id.button7)
         booksession.setOnClickListener {
+            // Retrieve data from the intent first
+            val name = intent.getStringExtra("name") ?: ""
+            val designation = intent.getStringExtra("designation") ?: ""
+            val description = intent.getStringExtra("description") // If you need to use this
+            val price = intent.getStringExtra("sessionprice") // If you need to use this
+            val status = intent.getStringExtra("status") // If you need to use this
+            val picuri = intent.getStringExtra("picuri")
+
+
             val datetime: String = dateFormat.toString() + selectedTime.toString()
-            val mentorname: String = name.toString()
-            val mentordesignation: String = designation.toString()
-
-            // Get the current user's email (assuming you have it stored somewhere)
-            val currentUserEmail: String = FirebaseAuth.getInstance().currentUser?.email ?: ""
-
-            // Create a reference to the Firebase database
-            val databaseReference = FirebaseDatabase.getInstance().getReference("bookedSessions")
-
-            // Generate a unique key for the booked session
-            val sessionId = databaseReference.push().key
-
-            // Create a booked session object
-            val bookedSession = bookedsessions(
-                useremail = currentUserEmail,
-                mentorname = mentorname,
-                mentordesignation = mentordesignation,
-                datetime = datetime,
-                picuri = picuri.toString()
-
-            )
-
-            // Write the booked session object to the database
-            sessionId?.let {
-                databaseReference.child(it).setValue(bookedSession)
-                    .addOnSuccessListener {
-                        // Booking successful
-                        Toast.makeText(this, "Session booked successfully", Toast.LENGTH_SHORT)
-                            .show()
 
 
-                        val firebaseHelper = FirebaseHelper()
-                        val notification = notifications(useremail = currentUserEmail, notificationdata = "Your Session booked successfully with  " + mentorname.toString() )
-                        firebaseHelper.addNotification(notification)
+            // Define the URL of your API endpoint
+            val url = "http://192.168.0.102/smd/insertbooking.php"
 
 
-                        val myFirebaseMessagingService = MyFirebaseMessagingService()
-                        myFirebaseMessagingService.generateNotification(this,"mentor_me", "Your Session booked successfully with  " + mentorname.toString()  )
+            val stringRequest = object : StringRequest(
+                Method.POST, url,
+                Response.Listener { response ->
+                    Log.d("API Response", response)
+                },
+                Response.ErrorListener { error ->
+                    Log.e("API Error", "Error occurred: ${error.message}")
+                }) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+
+
+                    val name = intent.getStringExtra("name") ?: ""
+                    val designation = intent.getStringExtra("designation") ?: ""
+                    val description = intent.getStringExtra("description") // If you need to use this
+                    val price = intent.getStringExtra("sessionprice") // If you need to use this
+                    val status = intent.getStringExtra("status") // If you need to use this
+                    val picuri = intent.getStringExtra("picuri")
 
 
 
-                    }
-                    .addOnFailureListener {
-                        // Error handling
-                        Toast.makeText(this, "Failed to book session", Toast.LENGTH_SHORT).show()
-                    }
+                    params["useremail"] = name
+                    params["mentorname"] = name
+                    params["mentordesignation"] = designation
+                    params["datetime"] = datetime.toString()
+                    params["picuri"] = picuri.toString()
+
+
+                    Log.d("name",name)
+                    Log.d("email",designation)
+                    Log.d("phone",designation)
+                    Log.d("country",datetime.toString())
+
+
+//                val firebaseHelper = FirebaseHelper()
+//                val notification = notifications(useremail = "userEmail.toString()", notificationdata = " Your have added a  mentor    " + name.toString() )
+//                firebaseHelper.addNotification(notification)
+//
+//                val myFirebaseMessagingService = MyFirebaseMessagingService()
+//                myFirebaseMessagingService.generateNotification(this,"mentor_me", " Your have added a  mentor    " + name.toString())
+//
+
+                    return params
+                }
             }
-
-            // Start the Main10Activity
-           // val intent = Intent(this, homepage::class.java)
-           // startActivity(intent)
+            Volley.newRequestQueue(this).add(stringRequest)
         }
 
 

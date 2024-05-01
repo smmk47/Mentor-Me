@@ -48,6 +48,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.firebase:firebase-messaging:23.4.1")
+    implementation("com.google.android.gms:play-services-cast-framework:21.4.0")
     // CameraX core library
     val camerax_version  = "1.1.0-alpha10"
     implementation ("androidx.camera:camera-core:$camerax_version")
@@ -120,7 +121,14 @@ dependencies {
 
     implementation ("com.akexorcist:screenshot-detection:1.0.2")
 
+    implementation("com.android.volley:volley:1.2.1")
+    //implementation ("org.xmlpull:xmlpull:1.1.9c")
+
+    implementation ("org.jsoup:jsoup:1.14.3")
+
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation ("androidx.test.espresso:espresso-intents:3.4.0")
+    implementation ("com.android.volley:volley:1.2.1")
+
 }

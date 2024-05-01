@@ -1,16 +1,13 @@
 package com.example.myapplication1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 
 class MainActivity23 : AppCompatActivity() {
 
@@ -30,32 +27,42 @@ class MainActivity23 : AppCompatActivity() {
         recyclerView.adapter = bookedSessionsAdapter
 
         // Load booked sessions data
+        loadBookedSessions()
 
     }
 
     private fun loadBookedSessions() {
-        val currentUserEmail = Firebase.auth.currentUser?.email
 
-        if (currentUserEmail != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference("bookedSessions")
-            val query: Query = databaseReference.orderByChild("useremail").equalTo(currentUserEmail)
+        val queue = Volley.newRequestQueue(this)
 
-            query.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (snapshot in dataSnapshot.children) {
-                        val session = snapshot.getValue(bookedsessions::class.java)
-                        session?.let {
-                            bookedSessionsList.add(it)
-                        }
-                    }
-                    bookedSessionsAdapter.notifyDataSetChanged()
+        val url="http://192.168.0.102/smd/getbooking.php"
+
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                val bookings = mutableListOf<bookedsessions>()
+                for (i in 0 until response.length()) {
+                    val jsonObject = response.getJSONObject(i)
+                    val booking = bookedsessions(
+                        useremail = jsonObject.getString("useremail"),
+                        mentorname = jsonObject.getString("mentorname"),
+                        mentordesignation = jsonObject.getString("mentordesignation"),
+                        datetime = jsonObject.getString("datetime"),
+                        picuri = jsonObject.getString("picuri")
+                    )
+                    bookedSessionsList.add(booking)
+
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle database error
-                }
+                bookedSessionsAdapter.notifyDataSetChanged()
+            },
+            { error ->
+                Log.e("MainActivity", "Error: ${error.toString()}")
             })
+
+        queue.add(jsonArrayRequest)
         }
     }
 
-}
+
+
+

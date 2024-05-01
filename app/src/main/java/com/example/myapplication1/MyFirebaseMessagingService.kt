@@ -1,7 +1,5 @@
 package com.example.myapplication1
 
-
-
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -16,16 +14,6 @@ const val channelName = "com.example.myapplication1"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-//    override fun onMessageReceived(remotemessage: RemoteMessage) {
-//        if (remotemessage.notification != null) {
-//            generateNotification(remotemessage.notification!!.title!!, remotemessage.notification!!.body!!)
-//
-//            generateNotification("mentor_me", "you added mentor succesfully")
-//
-//
-//        }
-//    }
-
     @SuppressLint("RemoteViewLayout")
     fun getRemoteView(context: Context, title: String, message: String): RemoteViews {
         val remoteView = RemoteViews("com.example.myapplication1", R.layout.notification)
@@ -36,7 +24,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     fun generateNotification(context: Context, title: String, message: String) {
-        var builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
+        val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.logo)
             .setContentTitle(title)
             .setContentText(message)
@@ -54,5 +42,4 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         notificationManager.notify(0, builder.build())
     }
-
 }

@@ -2,25 +2,24 @@ package com.example.myapplication1
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 
 class SignupActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth // Declare FirebaseAuth variable
+  //  private lateinit var auth: FirebaseAuth // Declare FirebaseAuth variable
+    val apiUrl = "http://172.17.10.38/smda2api/insertuser.php" // Change this to your API endpoint
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        auth = FirebaseAuth.getInstance()
+      //  auth = FirebaseAuth.getInstance()
 
         val sign: Button = findViewById(R.id.button2)
 
@@ -51,12 +50,13 @@ class SignupActivity : AppCompatActivity() {
             val name = nameEditText.text.toString().trim()
             val phone = phoneEditText.text.toString().trim()
             val country = countryEditText.text.toString().trim()
+            val city = cityEditText.text.toString().trim()
 
             if (userEmail.isEmpty() || userPass.isEmpty() || name.isEmpty() || phone.isEmpty() || country.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                // val signupUser = newuser(name, userEmail, phone, country, userPass)
-               // userSignUp(userEmail, userPass, signupUser)
+               userSignUp(userEmail, userPass, newuser(name,userEmail,phone,country,city,userPass,"",""))
             }
         }
     }
@@ -64,36 +64,47 @@ class SignupActivity : AppCompatActivity() {
 
 
     private fun userSignUp(email: String, password: String, signupUser: newuser) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user: FirebaseUser? = auth.currentUser
-                    submitData(signupUser)
-                    Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                } else {
-                    if (task.exception is FirebaseAuthUserCollisionException) {
-                        Toast.makeText(this, "Email already in use", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Sign up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+
+     submitData(signupUser)
+
+        val intent = Intent(this, searchhome::class.java)
+        startActivity(intent)
     }
 
     private fun submitData(signupUser: newuser) {
-        Log.d("Firebase", "Submitting data to database: $signupUser")
-        val database = FirebaseDatabase.getInstance().reference
-        database.child("Users").child(signupUser.email.replace(".", ",")).setValue(signupUser)
-            .addOnSuccessListener {
-                Toast.makeText(this@SignupActivity, "User registered successfully", Toast.LENGTH_SHORT).show()
-                Log.d("Firebase", "Data submitted successfully: $signupUser")
-                val intent = Intent(this@SignupActivity, homepage::class.java)
-                startActivity(intent)
-                finish()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this@SignupActivity, "Failed to register user: ${it.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Firebase", "Failed to submit data: ${it.message}")
-            }
+        // Form data
+
+        // Data to be inserted
+        val name = signupUser.name
+        val email = signupUser.email
+        val phone = signupUser.phone
+        val country =signupUser.country
+        val city = signupUser.city
+        val password = signupUser.password
+
+        val postData = "name=$name&email=$email&phone=$phone&country=$country&city=$city&password=$password"
+
+        // Creating HTTP connection
+        val url = URL(apiUrl)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = "POST"
+        connection.doOutput = true
+
+        // Sending data
+        val outputStream = OutputStreamWriter(connection.outputStream)
+        outputStream.write(postData)
+        outputStream.flush()
+
+        // Reading response
+        val responseCode = connection.responseCode
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            println("Data inserted successfully.")
+        } else {
+            println("Failed to insert data. Response code: $responseCode")
+        }
+
+        // Closing resources
+        outputStream.close()
+        connection.disconnect()
     }
 }

@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class searchhome : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+   // private lateinit var auth: FirebaseAuth
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +27,8 @@ class searchhome : AppCompatActivity() {
 
 
 
-        auth = FirebaseAuth.getInstance()
-        val currentUser: FirebaseUser? = auth.currentUser
+      //  auth = FirebaseAuth.getInstance()
+       // val currentUser: FirebaseUser? = auth.currentUser
 
         val searchBar :TextView= findViewById(R.id.searchbar)
         val search: TextView = findViewById(R.id.searchbutton)
@@ -40,16 +38,16 @@ class searchhome : AppCompatActivity() {
             // Get the text from the search bar
             val searchText = searchBar.text.toString()
 
-            auth = FirebaseAuth.getInstance()
+          //  auth = FirebaseAuth.getInstance()
 
-            val currentUserEmail = auth.currentUser?.email?.replace(".", ",")
+         //   val currentUserEmail = auth.currentUser?.email?.replace(".", ",")
 
             // Assuming you have a variable to store the current logged-in user
             // This function should return the current user
 
             // Put the data into the intent
             intent.putExtra("searchText", searchText)
-            intent.putExtra("currentUser", currentUserEmail)
+            intent.putExtra("currentUser", "currentUserEmail")
 
             startActivity(intent)
 
